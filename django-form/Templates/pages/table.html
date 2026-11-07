@@ -1,0 +1,42 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Students</h2>
+    <a href="{% url 'add_student' %}" class="btn btn-primary">Add New Student</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>University ID</th>
+                <th>National ID</th>
+                <th>Mobile Number</th>
+                <th>Address</th>
+                <th>Date of Birth</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.university_id }}</td>
+                <td>{{ student.national_id }}</td>
+                <td>{{ student.mobile }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.date_of_birth|date:"Y-m-d" }}</td>
+                <td><img src="{{ student.image.url }}" alt="{{ student.name }}" width="70" height="70" style="object-fit: cover;" class="rounded"></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">no students yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
